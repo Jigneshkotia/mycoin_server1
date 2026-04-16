@@ -11,13 +11,6 @@ using namespace std;
 using json = nlohmann::json;
 
 string handle_request(string path, string method, json body) {
-    // Remove trailing slash
-    // if (!path.empty() && path.back() == '/') {
-    //     path.pop_back();
-    // }
-
-    cout<< "mai hu donn !!!!!!!!!!!!!!" << path << method << body << endl;
-
     // Placeholder for Add transaction to Mempool
     if (path == "/add_tx" && method == "POST") {
         try {
