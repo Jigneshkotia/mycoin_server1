@@ -1,0 +1,1 @@
+# mycoin_server1

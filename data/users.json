@@ -1,0 +1,16 @@
+[
+    {
+        "confirmed_coins": 158.0,
+        "isFullNode": true,
+        "pending_coins": 0.0,
+        "privateKey": "private1",
+        "publicKey": "jignesh"
+    },
+    {
+        "confirmed_coins": 92.0,
+        "isFullNode": false,
+        "pending_coins": 0.0,
+        "privateKey": "private2",
+        "publicKey": "gunjan"
+    }
+]
