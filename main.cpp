@@ -18,9 +18,31 @@ Blockchain my_blockchain;
 
 
 int main() {
+    // int server_fd = socket(AF_INET, SOCK_STREAM, 0);
+
+    // int port = getenv("PORT") ? stoi(getenv("PORT")) : 8080;
+
+    // sockaddr_in address;
+    // address.sin_family = AF_INET;
+    // address.sin_addr.s_addr = INADDR_ANY;
+    // address.sin_port = htons(port);
+
+    // int opt = 1;
+    // setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+
+    // ::bind(server_fd, (struct sockaddr*)&address, sizeof(address));
+    // ::listen(server_fd, 10);
+
+    // cout << "Server running on port " << port << endl;
+
     int server_fd = socket(AF_INET, SOCK_STREAM, 0);
 
-    int port = getenv("PORT") ? stoi(getenv("PORT")) : 8080;
+    // FIXED PORT HANDLING
+    int port = 8080;
+    char* port_env = getenv("PORT");
+    if (port_env != nullptr) {
+        port = atoi(port_env);
+    }
 
     sockaddr_in address;
     address.sin_family = AF_INET;
@@ -30,8 +52,16 @@ int main() {
     int opt = 1;
     setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
 
-    ::bind(server_fd, (struct sockaddr*)&address, sizeof(address));
-    ::listen(server_fd, 10);
+    // ERROR CHECKING
+    if (::bind(server_fd, (struct sockaddr*)&address, sizeof(address)) < 0) {
+        perror("Bind failed");
+        exit(EXIT_FAILURE);
+    }
+
+    if (::listen(server_fd, 10) < 0) {
+        perror("Listen failed");
+        exit(EXIT_FAILURE);
+    }
 
     cout << "Server running on port " << port << endl;
 
