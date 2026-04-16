@@ -16,7 +16,7 @@ string handle_request(string path, string method, json body) {
     //     path.pop_back();
     // }
 
-    cout<< "mai hu donn !!!!!!!!!!!!!!" <<path << endl;
+    cout<< "mai hu donn !!!!!!!!!!!!!!" << path << method << body << endl;
 
     // Placeholder for Add transaction to Mempool
     if (path == "/add_tx" && method == "POST") {
@@ -183,6 +183,7 @@ string handle_request(string path, string method, json body) {
     
     // Placeholder for login 
     if (path == "/login" && method == "POST") { 
+        cout<< "ha bhai login function me aagya mai !!!!!!!!"<<endl;
         string privateKey = body.value("privateKey", "");
         json users = ServerUtils :: load_users();
 
@@ -200,10 +201,16 @@ string handle_request(string path, string method, json body) {
         }
 
         if (found) {
+            cout << "response chale gya !!!"<<endl;
+            cout<< userData <<endl;
+            cout << userData.dump()<<endl;
             return userData.dump();
         } else {
+            cout<< "user nhi mila wo chale gya !!!!!"<<endl;
             return json({{"status", "error"}, {"message", "User not found"}}).dump();
         }
+
+        cout<< " mai befaltu me call hogya bhai !!!!! "<<endl;
     }
 
     // Placeholder for start mining 
@@ -353,6 +360,7 @@ string handle_request(string path, string method, json body) {
         }
     }
 
+    cout<< " bhai tera koi bhi path match nhi hua !!! "<<endl;
     return R"({"error": "Endpoint not found"})";
 }
 
